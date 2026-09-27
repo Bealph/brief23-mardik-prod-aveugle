@@ -1,0 +1,10 @@
+{
+  "session_id": "replay-return-001",
+  "messages": [
+    {"role": "user", "content": "Bonjour, j'ai renvoyé la commande #3157 la semaine dernière."},
+    {"role": "assistant", "content": "Commande #3157 : retournée, remboursement en cours."},
+    {"role": "user", "content": "Et le remboursement, il en est où ?"},
+    {"role": "assistant", "content": "Il est en cours de traitement."},
+    {"role": "user", "content": "Pouvez-vous me le confirmer ?"}
+  ]
+}

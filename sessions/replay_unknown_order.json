@@ -1,0 +1,8 @@
+{
+  "session_id": "replay-unknown-order-001",
+  "messages": [
+    {"role": "user", "content": "Je n'arrive pas à suivre la commande #9999."},
+    {"role": "assistant", "content": "Je regarde."},
+    {"role": "user", "content": "Alors, vous la trouvez ?"}
+  ]
+}
