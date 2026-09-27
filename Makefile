@@ -1,7 +1,12 @@
-.PHONY: demo up down test test-unit test-integration verify-incidents demo-traces demo-jaeger docs-svg test-live fmt lint typecheck install
+.PHONY: hooks demo up down test test-unit test-integration verify-incidents demo-traces demo-jaeger docs-svg test-live fmt lint typecheck install
 
 install:
 	uv sync
+	git config core.hooksPath scripts/hooks
+
+# Refuse any commit that would publish a secret (.env, keys).
+hooks:
+	git config core.hooksPath scripts/hooks
 
 up:
 	docker compose up -d
