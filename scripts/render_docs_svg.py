@@ -178,7 +178,7 @@ def collect_traces() -> dict[str, list]:
         exporter = InMemorySpanExporter()
         telemetry = build_telemetry(span_exporter=exporter, metric_reader=InMemoryMetricReader(),
                                     capture_content=True)
-        agent = Agent(llm, DEFAULT_TOOLS, telemetry, model_name="Kimi-K2.6")
+        agent = Agent(llm, DEFAULT_TOOLS, telemetry)  # scripted: no model name to claim
         with baggage_test_context(f"schema::{key}", "render"):
             try:
                 action(agent)

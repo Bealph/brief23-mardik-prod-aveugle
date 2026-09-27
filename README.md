@@ -12,6 +12,7 @@ et leurs correctifs.
 
 - Les références « note de diagnostic, point N » renvoient aux notes de conception rangées hors
   du dépôt, dans le dossier parent (`../mardik-note-diagnostic-point-N.md`).
+- **Démo dans Jaeger, en une commande (`make demo`) : [DEMO.md](DEMO.md)**, avec captures.
 - Livrable de conception : [docs/schema-observabilite.md](docs/schema-observabilite.md)
   (points de trace, attributs, métriques, corrélation), et sa version
   [SVG](docs/schema-observabilite.svg).
@@ -124,9 +125,12 @@ synthétiques, aucune donnée personnelle n'est exportée.
 ### Option 2 : Jaeger (nécessite Docker)
 
 ```bash
-make up                   # docker compose up -d (Jaeger all-in-one)
-make demo-jaeger          # envoie les mêmes traces en OTLP vers localhost:4317
+make demo                 # Jaeger + traces + un tour réel Kimi-K2.6 si .env ; ouvre l'interface
 ```
+
+`make demo` enchaîne `make up`, l'attente de Jaeger, l'envoi des traces et l'ouverture de
+l'interface ; le parcours commenté et les captures sont dans [DEMO.md](DEMO.md).
+`make demo-jaeger` envoie les seules traces scriptées vers un Jaeger déjà lancé.
 
 Ouvrir http://localhost:16686, choisir le service `mardik`, puis « Find Traces ». Une recherche
 par tag `mardik.session.id=replay-delivery-001` regroupe les tours d'une session ;

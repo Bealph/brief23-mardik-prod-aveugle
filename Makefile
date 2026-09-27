@@ -1,4 +1,4 @@
-.PHONY: up down test test-unit test-integration verify-incidents demo-traces demo-jaeger docs-svg test-live fmt lint typecheck install
+.PHONY: demo up down test test-unit test-integration verify-incidents demo-traces demo-jaeger docs-svg test-live fmt lint typecheck install
 
 install:
 	uv sync
@@ -29,6 +29,12 @@ demo-traces:
 
 demo-jaeger:
 	uv run python scripts/demo_traces.py --jaeger
+
+# Full demo: Jaeger, scripted scenarios, one real-model turn when .env holds a key.
+ENV_FILE := $(if $(wildcard .env),--env-file .env,)
+
+demo: up
+	uv run $(ENV_FILE) python scripts/demo_traces.py --jaeger --wait --live
 
 docs-svg:
 	uv run python scripts/render_docs_svg.py
