@@ -126,6 +126,8 @@ Deux espaces de noms : `gen_ai.*` et `error.type` là où une convention OpenTel
 | `mardik.llm.input_messages`       | entier           | `3`               | Messages réellement transmis au modèle                                          | non     |
 | `mardik.llm.tool_calls_requested` | liste de chaînes | `[lookup_order]`  | Décision du modèle ; trajectoire                                                | non     |
 | `error.type`                      | chaîne           | `timeout`         | Cause d'échec de l'appel                                                        | non     |
+| `gen_ai.usage.input_tokens`       | entier           | `41`              | Tokens en entrée, si le client les renvoie (modèle réel)                        | non     |
+| `gen_ai.usage.output_tokens`      | entier           | `18`              | Tokens en sortie, si le client les renvoie (modèle réel)                        | non     |
 | `mardik.llm.completion`           | chaîne           | `Pouvez-vous ...` | Texte produit par le modèle                                                     | oui     |
 
 ### 4.3 `tool.call`
@@ -220,23 +222,26 @@ contiennent pas de contenu utilisateur au-delà du message d'exception.
 
 ## 9. Traçabilité : chaque signal sert un diagnostic
 
-| Incident ou panne type        | Signal qui le révèle                                                                   |
-| ----------------------------- | -------------------------------------------------------------------------------------- |
-| INC-01 perte du contexte      | `mardik.context.messages` inférieur au nombre de messages de la session rejouée        |
-| INC-02 timeout avalé          | `llm.invoke` ERROR `error.type=timeout` ; `errors_total{error.type="LLMTimeoutError"}` |
-| INC-03 course sur le compteur | Deux `agent.turn` d'une même session avec le même `mardik.turn.index`                  |
-| INC-04 trace orpheline        | `llm.invoke` sans parent, dans une trace différente de `agent.turn`                    |
-| INC-05 télémétrie non câblée  | Aucun span ni point de métrique après un tour                                          |
-| Outil inconnu                 | `tool.call` ERROR `error.type=unknown_tool` ; `tool_calls_total{tool="unknown"}`       |
-| Réponse vide                  | `mardik.turn.outcome=empty` ; `turns_total{outcome="empty"}`                           |
+| Incident ou panne type          | Signal qui le révèle                                                                                   |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| INC-01 perte du contexte        | `mardik.context.messages` inférieur au nombre de messages de la session rejouée                        |
+| INC-02 timeout avalé            | `llm.invoke` ERROR `error.type=timeout` ; `errors_total{error.type="LLMTimeoutError"}`                 |
+| INC-03 course sur le compteur   | Deux `agent.turn` d'une même session avec le même `mardik.turn.index`                                  |
+| INC-04 trace orpheline          | `llm.invoke` sans parent, dans une trace différente de `agent.turn`                                    |
+| INC-05 télémétrie non câblée    | Aucun span ni point de métrique après un tour                                                          |
+| INC-02b timeout du SDK Azure    | `llm.invoke` ERROR `error.type=timeout`, cause `ServiceResponseTimeoutError`                           |
+| INC-06 outils non transmis      | `mardik.llm.tool_calls_requested=[]` et aucun `tool.call` pour une question qui exige une consultation |
+| INC-07 déploiement non transmis | `llm.invoke` ERROR `HttpResponseError: Missed model deployment`                                        |
+| Outil inconnu                   | `tool.call` ERROR `error.type=unknown_tool` ; `tool_calls_total{tool="unknown"}`                       |
+| Réponse vide                    | `mardik.turn.outcome=empty` ; `turns_total{outcome="empty"}`                                           |
 
 ## 10. Limites assumées
 
 - **Pas de pilier « évaluations ».** Aucun score de justesse n'est rattaché aux traces. Les
   métriques ci-dessus décrivent le comportement de l'agent, pas l'exactitude de ses réponses
   (note, point 2, § 5).
-- **Pas de comptage de tokens ni de coût.** Le modèle réel n'a pas pu être appelé (pas
-  d'accès Azure dans cette session) ; les attributs `gen_ai.usage.*` sont une cible.
+- **Tokens sans coût.** `gen_ai.usage.input_tokens` et `output_tokens` sont enregistrés quand le
+  client les renvoie (modèle réel) ; le coût n'est pas calculé.
 - **Conventions GenAI d'OpenTelemetry non stables.** Les attributs `gen_ai.*` peuvent changer ;
   l'espace `mardik.*` est figé par ce document.
 - **Métriques non persistées en local.** Jaeger ne stocke pas de métriques ; un backend

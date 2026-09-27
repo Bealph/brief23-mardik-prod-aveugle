@@ -120,22 +120,22 @@
 <text x="40.0" y="614.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#1d1d1b" text-anchor="start">Voir les traces et les spans : traces réelles produites par l'agent au rendu de ce schéma</text>
 <rect x="40.0" y="644.0" width="810.0" height="358.0" rx="8" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1.5"/>
 <text x="54.0" y="670.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">Tour sain : replay_delivery, tour 2 (modèle scripté : durées quasi nulles)</text>
-<text x="54.0" y="690.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace_id 34d9caf7bc2d7d0b0aee8867c6a10c7b</text>
+<text x="54.0" y="690.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace_id 736a9c7496b2ea78f7b32185b2403e16</text>
 <text x="54.0" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="400" fill="#1d1d1b" text-anchor="start">agent.turn</text>
 <text x="130.3" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="11" font-weight="400" fill="#55554f" text-anchor="start">OK</text>
 <line x1="304.0" y1="708.0" x2="304.0" y2="738.0" stroke="#d9d9d4"/>
 <rect x="304.0" y="718.0" width="432.0" height="10" rx="4" fill="#6b7280"/>
-<text x="836.0" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">1.885 ms</text>
+<text x="836.0" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">0.964 ms</text>
 <text x="72.0" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="400" fill="#1d1d1b" text-anchor="start">llm.invoke</text>
 <text x="148.3" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="11" font-weight="400" fill="#55554f" text-anchor="start">OK</text>
 <line x1="304.0" y1="738.0" x2="304.0" y2="768.0" stroke="#d9d9d4"/>
-<rect x="534.1" y="748.0" width="115.8" height="10" rx="4" fill="#6b7280"/>
-<text x="836.0" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">0.505 ms</text>
+<rect x="736.0" y="748.0" width="3.0" height="10" rx="4" fill="#6b7280"/>
+<text x="836.0" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">0.000 ms</text>
 <text x="72.0" y="787.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="400" fill="#1d1d1b" text-anchor="start">tool.call</text>
 <text x="141.7" y="787.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="11" font-weight="400" fill="#55554f" text-anchor="start">OK</text>
 <line x1="304.0" y1="768.0" x2="304.0" y2="798.0" stroke="#d9d9d4"/>
-<rect x="649.9" y="778.0" width="86.1" height="10" rx="4" fill="#6b7280"/>
-<text x="836.0" y="787.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">0.376 ms</text>
+<rect x="736.0" y="778.0" width="3.0" height="10" rx="4" fill="#6b7280"/>
+<text x="836.0" y="787.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">0.000 ms</text>
 <text x="54.0" y="824.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#55554f" text-anchor="start">Attributs du span agent.turn</text>
 <text x="54.0" y="848.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">test.case_id</text>
 <text x="314.0" y="848.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">schema::sain</text>
@@ -153,17 +153,17 @@
 <text x="314.0" y="980.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">completed</text>
 <rect x="910.0" y="644.0" width="810.0" height="306.0" rx="8" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1.5"/>
 <text x="924.0" y="670.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">Incident : timeout du modèle (INC-02), session incident_timeout</text>
-<text x="924.0" y="690.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace_id f87f82110867e9b4e404a8e4eb147838</text>
+<text x="924.0" y="690.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace_id b1d14d63200fd1dc8ab816c635019369</text>
 <text x="924.0" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#d03b3b" text-anchor="start">!! agent.turn</text>
 <text x="1020.2" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="11" font-weight="400" fill="#55554f" text-anchor="start">ERROR</text>
 <line x1="1174.0" y1="708.0" x2="1174.0" y2="738.0" stroke="#d9d9d4"/>
 <rect x="1174.0" y="718.0" width="432.0" height="10" rx="4" fill="#d03b3b"/>
-<text x="1706.0" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">4.126 ms</text>
+<text x="1706.0" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">1.387 ms</text>
 <text x="942.0" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#d03b3b" text-anchor="start">!! llm.invoke</text>
 <text x="1038.2" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="11" font-weight="400" fill="#55554f" text-anchor="start">ERROR</text>
 <line x1="1174.0" y1="738.0" x2="1174.0" y2="768.0" stroke="#d9d9d4"/>
-<rect x="1287.9" y="748.0" width="209.2" height="10" rx="4" fill="#d03b3b"/>
-<text x="1706.0" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">1.998 ms</text>
+<rect x="1606.0" y="748.0" width="3.0" height="10" rx="4" fill="#d03b3b"/>
+<text x="1706.0" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">0.000 ms</text>
 <text x="924.0" y="794.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#55554f" text-anchor="start">Attributs du span llm.invoke (span en erreur le plus profond)</text>
 <text x="924.0" y="818.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">test.case_id</text>
 <text x="1184.0" y="818.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">schema::erreur</text>
@@ -180,12 +180,12 @@
 <rect x="40.0" y="1042.0" width="1680.0" height="172.0" rx="8" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1.5"/>
 <text x="54.0" y="1070.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">Une session = N traces reliées par mardik.session.id (replay_clarification, rejouée tour par tour)</text>
 <rect x="54.0" y="1094.0" width="1652.0" height="26.0" rx="5" fill="#f3f3f1" stroke="#d9d9d4" stroke-width="1"/>
-<text x="66.0" y="1112.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace 5e8fb896e62b24d9c42025f7f3e54d72</text>
+<text x="66.0" y="1112.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace 0305ce4abd521bf9eda73ff772fcb027</text>
 <text x="420.0" y="1112.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">agent.turn  session=replay-clarification-001  tour=1  issue=completed  réponse=« Pouvez-vous indiquer votre numéro de commande ? »</text>
 <rect x="54.0" y="1128.0" width="1652.0" height="26.0" rx="5" fill="#f3f3f1" stroke="#d9d9d4" stroke-width="1"/>
-<text x="66.0" y="1146.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace 832a43fa17e8b622601f83bc30f5cfa6</text>
+<text x="66.0" y="1146.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace 60820c5def67ad7c7179ece469d25922</text>
 <text x="420.0" y="1146.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">agent.turn  session=replay-clarification-001  tour=2  issue=completed  réponse=« Commande #2098 : en préparation. »</text>
 <rect x="54.0" y="1162.0" width="1652.0" height="26.0" rx="5" fill="#f3f3f1" stroke="#d9d9d4" stroke-width="1"/>
-<text x="66.0" y="1180.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace 1832d55a175453d85c5589a68c619111</text>
+<text x="66.0" y="1180.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace 944043f9de860f8e632e861b8344def8</text>
 <text x="420.0" y="1180.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">agent.turn  session=replay-clarification-001  tour=3  issue=completed  réponse=« Commande #2098 : en préparation. »</text>
 </svg>
