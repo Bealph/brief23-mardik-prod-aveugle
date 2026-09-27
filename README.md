@@ -132,12 +132,17 @@ Ouvrir http://localhost:16686, choisir le service `mardik`, puis « Find Traces 
 par tag `mardik.session.id=replay-delivery-001` regroupe les tours d'une session ;
 `error=true` isole les traces en erreur.
 
+Vérifié de bout en bout le 28 septembre 2026, par l'API de Jaeger après `make demo-jaeger` :
+13 traces et 37 spans reçus pour le service `mardik`, dont 2 traces en erreur ; aucun
+`llm.invoke` ni `tool.call` sans parent `agent.turn` ; la recherche par
+`mardik.session.id` renvoie les 3 tours d'une session.
+
 Docker Desktop exige que la virtualisation matérielle soit activée dans le BIOS/UEFI
-([prérequis Docker](https://docs.docker.com/desktop/setup/install/windows-install/)). Sur le
-poste de développement utilisé pour ce travail, elle ne l'est pas
-(`VirtualizationFirmwareEnabled` vaut `False`, message « Virtualization support not
-detected »). **L'option 2 n'a donc pas pu être vérifiée de bout en bout ici** ; l'option 1
-l'a été.
+([prérequis Docker](https://docs.docker.com/desktop/setup/install/windows-install/)) et WSL 2.
+Une fois l'hyperviseur Windows actif, `Win32_Processor.VirtualizationFirmwareEnabled` renvoie
+`False` même quand la virtualisation est activée : se fier plutôt à
+`(Get-CimInstance Win32_ComputerSystem).HypervisorPresent` ou au message de `systeminfo`
+« Un hyperviseur a été détecté ».
 
 ### Option 3 : Jaeger natif sous Windows, sans Docker
 
