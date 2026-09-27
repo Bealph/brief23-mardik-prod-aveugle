@@ -72,8 +72,8 @@ Phase « Développement ». Chaque ligne renvoie à sa preuve ; état au 27 sept
 ## Stack
 
 - Python 3.11, géré avec `uv`
-- LangChain 0.3 + `langchain-azure-ai` (modèle Kimi-K2.6 par défaut ; tests réels menés avec
-  `gpt-5.4-mini`, le déploiement disponible)
+- LangChain 0.3 + `langchain-azure-ai` (modèle Kimi-K2.6, servi par Azure AI Foundry sur la
+  route `/openai/v1`)
 - OpenTelemetry SDK (traces + métriques), exportateur OTLP/gRPC ; testé avec la version 1.45
 - structlog 24 (logs JSON)
 - pytest 8
@@ -193,7 +193,7 @@ make test-live          # charge .env et appelle le vrai modèle Azure
 numéro 1042 et la réponse « expédiée » ; le test vérifie aussi que `llm.invoke` porte l'usage de
 tokens. Ces tests sont exclus par défaut (`-m 'not live'`) et ne tournent pas en CI, faute de
 clé ; chaque exécution coûte quelques appels au modèle. Résultat du 27 septembre 2026 sur
-`gpt-5.4-mini` : vert.
+Kimi-K2.6 : vert (au moins 2 exécutions réussies sur 3).
 
 C'est ce test qui a révélé INC-06 et INC-07 : aucun test avec modèle scripté ne pouvait les voir.
 
@@ -450,8 +450,7 @@ make down       # arrête les services Docker
 - **Délai par lecture, pas d'échéance globale.** `MARDIK_LLM_TIMEOUT_S` borne chaque lecture
   réseau ; une réponse qui arrive lentement par morceaux peut durer plus longtemps.
 - **Test réel limité.** Un seul scénario (`replay_delivery`) est rejoué contre le vrai modèle,
-  hors CI, sur `gpt-5.4-mini` et non sur Kimi-K2.6 prévu par le brief. Les autres tests
-  utilisent un modèle scripté. Aucun score d'évaluation n'est calculé.
+  hors CI. Les autres tests utilisent un modèle scripté. Aucun score d'évaluation n'est calculé.
 - **Métriques non persistées en local.** Jaeger ne stocke que les traces.
 - **Pas de masquage** des données personnelles dans les attributs de contenu.
 - **Formatage.** `ruff format --check` signale des fichiers non formatés, y compris des
