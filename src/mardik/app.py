@@ -23,7 +23,7 @@ def build_agent(
     if llm is None:
         from .llm import get_llm
 
-        llm = get_llm(settings)
+        llm = get_llm(settings, tools=DEFAULT_TOOLS)
     if telemetry is None:
         from .telemetry import build_default_telemetry
 

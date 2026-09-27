@@ -67,6 +67,14 @@ class Agent:
                 "mardik.llm.tool_calls_requested",
                 [str(call.get("name")) for call in reply.tool_calls],
             )
+            # Token usage, when the client reports it (LangChain usage_metadata).
+            usage = getattr(reply, "usage_metadata", None) or {}
+            for key, attribute in (
+                ("input_tokens", "gen_ai.usage.input_tokens"),
+                ("output_tokens", "gen_ai.usage.output_tokens"),
+            ):
+                if usage.get(key) is not None:
+                    span.set_attribute(attribute, int(usage[key]))
             if self.telemetry.capture_content:
                 span.set_attribute("mardik.llm.completion", truncate(str(reply.content)))
             span.set_status(Status(StatusCode.OK))

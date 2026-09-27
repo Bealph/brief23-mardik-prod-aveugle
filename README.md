@@ -1,6 +1,7 @@
 # Mardik Support Agent
 
-Agent conversationnel de support client connecté à un modèle Azure (Kimi-K2.6),
+Agent conversationnel de support client connecté à un modèle Azure (Kimi-K2.6 par défaut,
+configurable),
 instrumenté avec OpenTelemetry et validé par rejeu de sessions enregistrées.
 
 Ce dépôt répond au brief « L'application qui ment sur sa santé ». L'application tombait en
@@ -19,6 +20,26 @@ et leurs correctifs.
 
 ![Pipeline d'observabilité et d'évaluation](docs/pipeline-observabilite-eval.svg)
 - Journal de session : [docs/journal/](docs/journal/).
+
+## Checklist du brief
+
+Phase « Développement ». Chaque ligne renvoie à sa preuve ; état au 27 septembre 2026.
+
+- [x] **Écrire des tests d'intégration rejouant des sessions réelles.** 20 tests d'intégration
+  rejouent `sessions/*.json` sur les axes longitudinal et transversal ; un test en conditions
+  réelles rejoue une session contre le vrai modèle Azure. Réserve : une seule session provient
+  du dépôt d'origine, les quatre autres sont reconstituées (voir [Tests](#tests)).
+- [x] **Instrumenter l'application (traces, métriques, logs structurés).** Spans `agent.turn`,
+  `llm.invoke`, `tool.call` ; sept métriques ; logs JSON portant `trace_id` et `span_id`
+  (voir [docs/schema-observabilite.md](docs/schema-observabilite.md)).
+- [x] **Diagnostiquer et corriger au moins deux incidents récurrents.** Huit incidents corrigés,
+  INC-01 à INC-07 (voir [Incidents](#incidents-récurrents--causes-et-correctifs)).
+- [x] **Vérifier que les tests d'intégration détectent désormais ces incidents.**
+  `make verify-incidents` réinjecte chaque défaut : 8 sur 8 détectés ; exécuté aussi en CI
+  (voir [Preuve de détection](#preuve-de-détection)).
+- [x] **Documenter causes et correctifs.** Pour chaque incident : symptôme, signature dans la
+  trace, cause, correctif, test qui le détecte (voir
+  [Incidents](#incidents-récurrents--causes-et-correctifs)).
 
 ## Sommaire
 
@@ -51,7 +72,8 @@ et leurs correctifs.
 ## Stack
 
 - Python 3.11, géré avec `uv`
-- LangChain 0.3 + `langchain-azure-ai` (modèle Kimi-K2.6)
+- LangChain 0.3 + `langchain-azure-ai` (modèle Kimi-K2.6 par défaut ; tests réels menés avec
+  `gpt-5.4-mini`, le déploiement disponible)
 - OpenTelemetry SDK (traces + métriques), exportateur OTLP/gRPC ; testé avec la version 1.45
 - structlog 24 (logs JSON)
 - pytest 8
@@ -155,6 +177,25 @@ réponse (ce que voit l'utilisateur) et la trace (ce qu'a fait l'agent).
 | `test_spans_name_the_test_that_produced_them`          | Lien trace → test | Chaque span porte `test.case_id` et `test.run_id`                                                    |
 | `test_logs_carry_the_trace_and_span_ids`               | Lien log → trace  | La ligne `turn.completed` pointe le span `agent.turn`                                                |
 | `test_trace_report_points_at_the_failing_span`         | Lien test → trace | Le rapport d'un test rouge signale le span fautif et son exception                                   |
+| `test_production_llm_is_given_the_agent_tools`         | INC-06            | Le client Azure de production reçoit les outils de l'agent (sans appel réseau)                       |
+| `test_production_llm_accepts_the_openai_v1_route`      | INC-07            | Nom du déploiement transmis, version d'API et délai réglés (sans appel réseau)                       |
+| `test_azure_sdk_timeout_surfaces_as_llm_timeout`       | INC-02            | Le timeout réel du SDK Azure ressort en `LLMTimeoutError`, span ERROR                                |
+
+### Tests en conditions réelles
+
+```bash
+make test-live          # charge .env et appelle le vrai modèle Azure
+```
+
+`tests/live/test_live_azure.py` rejoue `replay_delivery` contre le modèle réel, via
+`build_agent()`. Le modèle n'étant pas déterministe, le cas déclare ses répétitions et son seuil :
+3 exécutions, au moins 2 réussies. Une réussite exige un seul appel à `lookup_order` avec le
+numéro 1042 et la réponse « expédiée » ; le test vérifie aussi que `llm.invoke` porte l'usage de
+tokens. Ces tests sont exclus par défaut (`-m 'not live'`) et ne tournent pas en CI, faute de
+clé ; chaque exécution coûte quelques appels au modèle. Résultat du 27 septembre 2026 sur
+`gpt-5.4-mini` : vert.
+
+C'est ce test qui a révélé INC-06 et INC-07 : aucun test avec modèle scripté ne pouvait les voir.
 
 Les sessions de `sessions/` sont au format des enregistrements d'origine. Seule
 `replay_delivery.json` provient du dépôt initial ; les autres (`replay_return`,
@@ -166,16 +207,19 @@ s'ajoute en déposant un fichier `replay_*.json` et en déclarant son résultat 
 ### Preuve de détection
 
 `scripts/verify_incident_detection.py` copie le dépôt dans un dossier temporaire, y
-réintroduit chaque défaut d'origine un par un, et lance la suite d'intégration. Le dossier de
+réintroduit chaque défaut un par un, et lance la suite d'intégration (hors ligne). Le dossier de
 travail n'est jamais modifié. Résultat mesuré le 27 septembre 2026 :
 
 | Incident | Défaut réintroduit                         | Tests d'intégration rouges |
 | -------- | ------------------------------------------ | -------------------------- |
 | INC-01   | Rejeu du seul dernier message              | 6                          |
-| INC-02   | Timeout transformé en `None`               | 3                          |
+| INC-02   | Timeout transformé en `None`               | 4                          |
+| INC-02b  | Timeout du SDK Azure non converti          | 1                          |
 | INC-03   | Compteur de tours sans verrou              | 1                          |
 | INC-04   | Contexte de trace non copié dans le thread | 3                          |
-| INC-05   | Télémétrie ignorée par `build_agent`       | 13                         |
+| INC-05   | Télémétrie ignorée par `build_agent`       | 14                         |
+| INC-06   | Outils non transmis au modèle              | 2                          |
+| INC-07   | Nom du déploiement ignoré (`model_name=`)  | 2                          |
 
 INC-03 dépend d'une course entre threads : sa détection a été rejouée 10 fois, 10 fois
 détectée. Sur le code corrigé, la suite complète a été lancée 20 fois, 20 fois verte.
@@ -227,7 +271,9 @@ thread de travail. La cause est dans `Agent._invoke_llm`.
 ## Incidents récurrents : causes et correctifs
 
 État de départ mesuré : **9 tests sur 10 en échec** (`pytest`, dépôt téléchargé sans
-modification). Cinq incidents distincts en rendent compte. Chacun est documenté ci-dessous :
+modification). Cinq incidents distincts en rendent compte (INC-01 à INC-05). Trois autres
+(INC-02b, INC-06, INC-07) sont apparus au premier test en conditions réelles. Chacun est
+documenté ci-dessous :
 symptôme, signature, cause, correctif, test qui le détecte désormais.
 
 ### INC-01 : le rejeu perdait le contexte de la session
@@ -256,8 +302,12 @@ symptôme, signature, cause, correctif, test qui le détecte désormais.
   chaînée) ; l'exception du thread est relancée dans l'appelant. Le tour est compté dans
   `errors_total` et journalisé (`turn.failed`). La session `incident_timeout.json`, référencée
   par un test mais absente du dépôt, a été ajoutée.
+- **Complément observé en conditions réelles (INC-02b).** Le SDK Azure ne lève pas
+  `TimeoutError` mais `azure.core.exceptions.ServiceResponseTimeoutError`, qui n'en hérite pas.
+  `llm.AzureLLM` la convertit ; le délai de lecture passe de 300 s (défaut d'azure-core) à 30 s,
+  réglable par `MARDIK_LLM_TIMEOUT_S`.
 - **Détecté par.** `test_llm_timeout_is_explicit_and_traced`, `test_replay_timeout_incident`,
-  `test_trace_report_points_at_the_failing_span`.
+  `test_trace_report_points_at_the_failing_span`, `test_azure_sdk_timeout_surfaces_as_llm_timeout`.
 
 ### INC-03 : le compteur de tours se corrompait sous charge
 
@@ -292,7 +342,7 @@ symptôme, signature, cause, correctif, test qui le détecte désormais.
 - **Correctif.** `build_agent` transmet la télémétrie reçue, ou construit la télémétrie de
   production (`build_default_telemetry` : OTLP par lots, ressource `service.name`,
   `service.version`, `deployment.environment.name`).
-- **Détecté par.** Les tests d'intégration qui passent par `build_agent` (13 deviennent rouges
+- **Détecté par.** Les tests d'intégration qui passent par `build_agent` (14 deviennent rouges
   si le défaut revient), et `test_build_agent_wires_telemetry`.
 
 ### Autres défauts corrigés
@@ -307,23 +357,49 @@ symptôme, signature, cause, correctif, test qui le détecte désormais.
 | Spans réussis laissés au statut UNSET                        | Statut OK explicite, ERROR si la réponse est vide                          |
 | CI limitée aux tests unitaires                               | CI : lint, unitaires, intégration, preuve de détection, artefact de traces |
 
+### INC-06 : le modèle réel ne recevait pas les outils
+
+- **Symptôme.** Face à « Où en est la livraison de ma commande #1042 ? », le modèle réel ne
+  pouvait pas consulter le statut : il ne connaissait pas l'outil `lookup_order`.
+- **Signature.** `mardik.llm.tool_calls_requested=[]` et aucun span `tool.call` pour une question
+  qui exige une consultation.
+- **Cause.** `llm.get_llm` construisait le client sans `bind_tools`. Invisible avec le modèle
+  scripté des tests, qui renvoie ses appels d'outil sans qu'on les lui déclare.
+- **Correctif.** `build_agent` passe les outils à `get_llm`, qui les lie au modèle.
+- **Détecté par.** `test_production_llm_is_given_the_agent_tools` (hors ligne) et
+  `test_real_model_looks_the_order_up_from_the_history` (conditions réelles).
+
+### INC-07 : le nom du déploiement n'était jamais transmis
+
+- **Symptôme.** Tout appel au modèle réel échouait.
+- **Signature.** Trace du premier test réel : `llm.invoke` ERROR,
+  `HttpResponseError: Missed model deployment`.
+- **Cause.** Le client déclare ce champ sous l'alias `model` ; `model_name=` était ignoré sans
+  erreur. S'y ajoutait, sur la route `/openai/v1`, un refus de la version d'API envoyée par
+  défaut (HTTP 400 « API version not supported ») : comportement observé, non documenté.
+- **Correctif.** `model=` au lieu de `model_name=` ; `api_version="preview"` sur la route v1.
+- **Détecté par.** `test_production_llm_accepts_the_openai_v1_route` (hors ligne) et le test en
+  conditions réelles.
+
 ## Configuration
 
 Variables lues depuis l'environnement (voir `.env.example`) :
 
-| Variable                      | Défaut                  | Rôle                                                                   |
-| ----------------------------- | ----------------------- | ---------------------------------------------------------------------- |
-| `AZURE_AI_ENDPOINT`           | vide                    | Point d'accès Azure AI Inference                                       |
-| `AZURE_AI_API_KEY`            | vide                    | Clé d'API ; ne jamais la versionner                                    |
-| `AZURE_AI_MODEL`              | `Kimi-K2.6`             | Modèle ; reporté dans `gen_ai.request.model`                           |
-| `OTEL_EXPORTER_OTLP_ENDPOINT` | `http://localhost:4317` | Collecteur OTLP gRPC                                                   |
-| `OTEL_SERVICE_NAME`           | `mardik`                | `service.name` des traces et métriques                                 |
-| `APP_ENV`                     | `development`           | `deployment.environment.name`                                          |
-| `LOG_LEVEL`                   | `INFO`                  | Niveau des logs                                                        |
-| `MARDIK_TRACE_CONTENT`        | `false`                 | Écrit question, réponse, arguments et résultats d'outil dans les spans |
-| `MARDIK_METRICS_EXPORTER`     | `console`               | `console`, `otlp` ou `none`                                            |
-| `MARDIK_TRACE_ARTIFACTS`      | non défini              | Dossier où les tests écrivent un JSON de traces par test (CI)          |
-| `MARDIK_SESSIONS_DIR`         | `sessions`              | Dossier des sessions enregistrées                                      |
+| Variable                      | Défaut                  | Rôle                                                                    |
+| ----------------------------- | ----------------------- | ----------------------------------------------------------------------- |
+| `AZURE_AI_ENDPOINT`           | vide                    | Point d'accès Azure AI Inference                                        |
+| `AZURE_AI_API_KEY`            | vide                    | Clé d'API ; ne jamais la versionner                                     |
+| `AZURE_AI_MODEL`              | `Kimi-K2.6`             | Modèle ; reporté dans `gen_ai.request.model`                            |
+| `OTEL_EXPORTER_OTLP_ENDPOINT` | `http://localhost:4317` | Collecteur OTLP gRPC                                                    |
+| `OTEL_SERVICE_NAME`           | `mardik`                | `service.name` des traces et métriques                                  |
+| `APP_ENV`                     | `development`           | `deployment.environment.name`                                           |
+| `LOG_LEVEL`                   | `INFO`                  | Niveau des logs                                                         |
+| `MARDIK_TRACE_CONTENT`        | `false`                 | Écrit question, réponse, arguments et résultats d'outil dans les spans  |
+| `MARDIK_METRICS_EXPORTER`     | `console`               | `console`, `otlp` ou `none`                                             |
+| `MARDIK_LLM_TIMEOUT_S`        | `30`                    | Délai de lecture d'un appel au modèle, en secondes (par lecture réseau) |
+| `MARDIK_LLM_MAX_RETRIES`      | `2`                     | Nouvelles tentatives du SDK Azure (les timeouts ne sont pas retentés)   |
+| `MARDIK_TRACE_ARTIFACTS`      | non défini              | Dossier où les tests écrivent un JSON de traces par test (CI)           |
+| `MARDIK_SESSIONS_DIR`         | `sessions`              | Dossier des sessions enregistrées                                       |
 
 `MARDIK_TRACE_CONTENT` expose des données personnelles potentielles. Aucun masquage n'est
 implémenté : le laisser à `false` en production.
@@ -336,7 +412,7 @@ src/mardik/
   app.py          Assemblage de l'agent (télémétrie de production incluse) + CLI
   config.py       Configuration lue depuis l'environnement
   errors.py       Exceptions de domaine (LLMTimeoutError, ToolExecutionError)
-  llm.py          Fabrique du client Azure (Kimi-K2.6)
+  llm.py          Client Azure : outils liés, délai, conversion des timeouts du SDK
   runner.py       Rejeu de sessions enregistrées (dernier tour, ou tour par tour)
   session.py      Stockage des sessions partagé entre tours concurrents, verrouillé
   telemetry.py    Tracer, logger, instruments de métriques, lien baggage de test
@@ -345,7 +421,8 @@ tests/
   conftest.py         Modèles scriptés, télémétrie en mémoire, rapport de traces sur échec
   tracing_support.py  Outils partagés : baggage de test, rendu des traces, concurrence
   unit/               Tests unitaires
-  integration/        Rejeu, multi-sessions, incidents tracés
+  integration/        Rejeu, multi-sessions, incidents tracés, assemblage de production
+  live/               Tests en conditions réelles contre le modèle Azure (make test-live)
 scripts/
   demo_traces.py                 Traces de démonstration : visionneuse HTML ou Jaeger
   render_docs_svg.py             Génère les SVG de docs/ (schéma, pipeline avec traces réelles)
@@ -370,17 +447,11 @@ make down       # arrête les services Docker
 
 ## Limites connues
 
-- **Le modèle réel ne reçoit pas les outils.** `llm.get_llm` construit le client Azure sans
-  appeler `bind_tools` : en production, le modèle ne peut pas demander `lookup_order`, et
-  risque de répondre sans consulter le statut de commande. Non corrigé : sans accès Azure, le
-  correctif ne pouvait pas être testé. C'est le prochain incident probable.
-- **Exceptions de timeout du SDK Azure non vérifiées.** Le correctif d'INC-02 traite
-  `TimeoutError` ; l'exception réellement levée par `langchain-azure-ai` lors d'un timeout n'a
-  pas été observée. À confirmer avec un appel réel.
-- **Pas de délai imposé à l'appel du modèle.** Le thread attend sans limite ; un modèle bloqué
-  bloque le tour.
-- **Modèle scripté dans les tests.** Les tests vérifient l'enchaînement et l'état, pas la
-  qualité des réponses d'un vrai modèle. Aucun score d'évaluation n'est calculé.
+- **Délai par lecture, pas d'échéance globale.** `MARDIK_LLM_TIMEOUT_S` borne chaque lecture
+  réseau ; une réponse qui arrive lentement par morceaux peut durer plus longtemps.
+- **Test réel limité.** Un seul scénario (`replay_delivery`) est rejoué contre le vrai modèle,
+  hors CI, sur `gpt-5.4-mini` et non sur Kimi-K2.6 prévu par le brief. Les autres tests
+  utilisent un modèle scripté. Aucun score d'évaluation n'est calculé.
 - **Métriques non persistées en local.** Jaeger ne stocke que les traces.
 - **Pas de masquage** des données personnelles dans les attributs de contenu.
 - **Formatage.** `ruff format --check` signale des fichiers non formatés, y compris des

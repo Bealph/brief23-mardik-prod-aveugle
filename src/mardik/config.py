@@ -22,6 +22,9 @@ class Settings:
     metrics_exporter: str = "console"
     # Record prompts, tool arguments and replies on spans (personal data risk).
     trace_content: bool = False
+    # Per-read deadline of an LLM call, in seconds, and retries on failure.
+    llm_timeout_s: float = 30.0
+    llm_max_retries: int = 2
 
 
 def load_settings() -> Settings:
@@ -35,4 +38,6 @@ def load_settings() -> Settings:
         app_env=os.environ.get("APP_ENV", "development"),
         metrics_exporter=os.environ.get("MARDIK_METRICS_EXPORTER", "console").strip().lower(),
         trace_content=env_flag("MARDIK_TRACE_CONTENT"),
+        llm_timeout_s=float(os.environ.get("MARDIK_LLM_TIMEOUT_S", "30")),
+        llm_max_retries=int(os.environ.get("MARDIK_LLM_MAX_RETRIES", "2")),
     )

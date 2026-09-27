@@ -33,6 +33,9 @@ packages = ["src/mardik"]
 testpaths = ["tests"]
 pythonpath = ["src"]
 asyncio_mode = "auto"
+# Live tests call the real Azure model: opt in with `make test-live`.
+addopts = "-m 'not live'"
+markers = ["live: calls the real Azure model (needs .env, costs model calls)"]
 
 [tool.ruff]
 line-length = 100
