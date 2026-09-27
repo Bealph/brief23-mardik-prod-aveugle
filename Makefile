@@ -1,4 +1,4 @@
-.PHONY: up down test test-unit test-integration verify-incidents demo-traces demo-jaeger docs-svg fmt lint typecheck install
+.PHONY: up down test test-unit test-integration verify-incidents demo-traces demo-jaeger docs-svg test-live fmt lint typecheck install
 
 install:
 	uv sync
@@ -17,6 +17,9 @@ test-unit:
 
 test-integration:
 	uv run pytest tests/integration -v
+
+test-live:
+	uv run --env-file .env pytest tests/live -m live -v
 
 verify-incidents:
 	uv run python scripts/verify_incident_detection.py

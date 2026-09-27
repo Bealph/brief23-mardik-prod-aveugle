@@ -51,6 +51,13 @@ INCIDENTS = (
         "                return None  # type: ignore[return-value]\n",
     ),
     Incident(
+        "INC-02b",
+        "timeout du SDK Azure non converti (ServiceResponseTimeoutError)",
+        "src/mardik/llm.py",
+        '            raise TimeoutError(f"Azure SDK timeout: {type(exc).__name__}") from exc\n',
+        "            raise\n",
+    ),
+    Incident(
         "INC-03",
         "compteur de tours non atomique sous concurrence",
         "src/mardik/session.py",
@@ -74,6 +81,20 @@ INCIDENTS = (
         "src/mardik/app.py",
         "        telemetry=telemetry,\n",
         "",
+    ),
+    Incident(
+        "INC-06",
+        "outils jamais transmis au modèle réel",
+        "src/mardik/llm.py",
+        "    runnable = model.bind_tools(list(tools.values())) if tools else model\n",
+        "    runnable = model\n",
+    ),
+    Incident(
+        "INC-07",
+        "nom du déploiement ignoré par le client Azure (model_name=)",
+        "src/mardik/llm.py",
+        "        model=settings.azure_model,\n",
+        "        model_name=settings.azure_model,\n",
     ),
 )
 
