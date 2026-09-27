@@ -20,10 +20,14 @@ def build_agent(
     always ran with NoOpTelemetry and emitted nothing.
     """
     settings = settings or load_settings()
+    # The model name goes on the spans only when we build the client ourselves:
+    # an injected client (a scripted test model) is not the configured deployment.
+    model_name = None
     if llm is None:
         from .llm import get_llm
 
         llm = get_llm(settings, tools=DEFAULT_TOOLS)
+        model_name = settings.azure_model
     if telemetry is None:
         from .telemetry import build_default_telemetry
 
@@ -32,7 +36,7 @@ def build_agent(
         llm=llm,
         tools=DEFAULT_TOOLS,
         telemetry=telemetry,
-        model_name=settings.azure_model,
+        model_name=model_name,
     )
 
 

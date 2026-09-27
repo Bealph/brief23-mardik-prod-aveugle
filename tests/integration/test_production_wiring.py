@@ -62,6 +62,20 @@ def test_production_llm_accepts_the_openai_v1_route(v1_settings, telemetry):
     assert model.client_kwargs["retry_total"] == v1_settings.llm_max_retries
 
 
+def test_injected_model_is_not_reported_as_the_deployment(make_agent, fake_llm, span_exporter):
+    """A scripted model must not appear in traces as the configured Azure deployment."""
+    replay(load_session("replay_delivery"), make_agent(fake_llm), SessionStore())
+
+    (llm,) = spans_named(span_exporter.get_finished_spans(), "llm.invoke")
+    assert "gen_ai.request.model" not in llm.attributes, describe(llm)
+
+
+def test_built_model_is_reported_on_the_spans(v1_settings, telemetry):
+    """When build_agent builds the Azure client, the spans name its deployment."""
+    agent = build_agent(telemetry=telemetry, settings=v1_settings)
+    assert agent.model_name == v1_settings.azure_model
+
+
 class _SdkTimeoutModel:
     """Raises what azure-core raises on a read timeout (observed on the real service)."""
 
