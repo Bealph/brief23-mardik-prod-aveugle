@@ -14,21 +14,37 @@ def build_agent(
     telemetry: Any | None = None,
     settings: Settings | None = None,
 ) -> Agent:
-    """Assemble the production agent from configuration."""
+    """Assemble the production agent from configuration.
+
+    INC-05: the telemetry argument used to be ignored, so the production agent
+    always ran with NoOpTelemetry and emitted nothing.
+    """
     settings = settings or load_settings()
     if llm is None:
         from .llm import get_llm
 
         llm = get_llm(settings)
-    return Agent(llm=llm, tools=DEFAULT_TOOLS)
+    if telemetry is None:
+        from .telemetry import build_default_telemetry
+
+        telemetry = build_default_telemetry(settings)
+    return Agent(
+        llm=llm,
+        tools=DEFAULT_TOOLS,
+        telemetry=telemetry,
+        model_name=settings.azure_model,
+    )
 
 
 def main() -> None:
     settings = load_settings()
     agent = build_agent(settings=settings)
     store = SessionStore()
-    result = agent.run_turn(store, "cli", "Bonjour")
-    print(result.reply)
+    try:
+        result = agent.run_turn(store, "cli", "Bonjour")
+        print(result.reply)
+    finally:
+        agent.telemetry.shutdown()
 
 
 if __name__ == "__main__":

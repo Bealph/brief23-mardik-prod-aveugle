@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1760" height="1254" viewBox="0 0 1760 1254" role="img" aria-label="Mardik : pipeline d'observabilité et d'évaluation">
+<title>Mardik : pipeline d'observabilité et d'évaluation</title>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a5bd7"/></marker>
+<marker id="arrow-dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8a83"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#fcfcfb"/>
+<text x="40.0" y="50.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="26" font-weight="700" fill="#1d1d1b" text-anchor="start">Mardik : pipeline d'observabilité et d'évaluation</text>
+<text x="40.0" y="78.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="14" font-weight="400" fill="#55554f" text-anchor="start">Trait plein : implémenté et testé dans ce dépôt. Pointillés : cible, non implémentée. !! et rouge : span en ERROR.</text>
+<rect x="40.0" y="110.0" width="300.0" height="184.0" rx="8" fill="#f3f3f1" stroke="#d9d9d4" stroke-width="1.5"/>
+<text x="56.0" y="138.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">1. Sources</text>
+<rect x="50.0" y="156.0" width="280.0" height="78.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="58.0" y="173.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Tests d'intégration</text>
+<text x="58.0" y="190.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>Rejouent</tspan><tspan> </tspan><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">sessions/*.json</tspan><tspan> </tspan><tspan>via</tspan></text>
+<text x="58.0" y="208.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">build_agent()</tspan><tspan> </tspan><tspan>;</tspan><tspan> </tspan><tspan>posent</tspan><tspan> </tspan><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">test.case_id</tspan><tspan>,</tspan></text>
+<text x="58.0" y="226.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">test.run_id</tspan><tspan> </tspan><tspan>dans</tspan><tspan> </tspan><tspan>le</tspan><tspan> </tspan><tspan>baggage</tspan></text>
+<rect x="50.0" y="240.0" width="280.0" height="42.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="58.0" y="257.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Production</text>
+<text x="58.0" y="274.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>CLI</tspan><tspan> </tspan><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">mardik.app</tspan><tspan>,</tspan><tspan> </tspan><tspan>modèle</tspan><tspan> </tspan><tspan>Azure</tspan><tspan> </tspan><tspan>Kimi-K2.6</tspan></text>
+<rect x="382.0" y="110.0" width="300.0" height="250.0" rx="8" fill="#f3f3f1" stroke="#d9d9d4" stroke-width="1.5"/>
+<text x="398.0" y="138.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">2. Agent instrumenté</text>
+<rect x="392.0" y="156.0" width="280.0" height="60.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="400.0" y="173.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">agent.turn</text>
+<text x="400.0" y="190.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>1</tspan><tspan> </tspan><tspan>trace</tspan><tspan> </tspan><tspan>par</tspan><tspan> </tspan><tspan>tour</tspan><tspan> </tspan><tspan>;</tspan><tspan> </tspan><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">mardik.session.id</tspan><tspan>,</tspan></text>
+<text x="400.0" y="208.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">mardik.turn.index</tspan><tspan>,</tspan><tspan> </tspan><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">mardik.turn.outcome</tspan></text>
+<rect x="392.0" y="222.0" width="280.0" height="60.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="400.0" y="239.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">llm.invoke</text>
+<text x="400.0" y="256.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>Thread</tspan><tspan> </tspan><tspan>dédié,</tspan><tspan> </tspan><tspan>contexte</tspan><tspan> </tspan><tspan>copié</tspan><tspan> </tspan><tspan>;</tspan></text>
+<text x="400.0" y="274.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">gen_ai.request.model</tspan><tspan>,</tspan><tspan> </tspan><tspan>outils</tspan><tspan> </tspan><tspan>demandés</tspan></text>
+<rect x="392.0" y="288.0" width="280.0" height="60.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="400.0" y="305.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">tool.call</text>
+<text x="400.0" y="322.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">gen_ai.tool.name</tspan><tspan>,</tspan><tspan> </tspan><tspan>statut,</tspan><tspan> </tspan><tspan>arguments,</tspan></text>
+<text x="400.0" y="340.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>résultat</tspan></text>
+<rect x="724.0" y="110.0" width="300.0" height="268.0" rx="8" fill="#f3f3f1" stroke="#d9d9d4" stroke-width="1.5"/>
+<text x="740.0" y="138.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">3. SDK OpenTelemetry</text>
+<rect x="734.0" y="156.0" width="280.0" height="78.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="742.0" y="173.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Traces</text>
+<text x="742.0" y="190.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">BaggageTestContextProcessor</tspan><tspan> </tspan><tspan>puis</tspan></text>
+<text x="742.0" y="208.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">SimpleSpanProcessor</tspan><tspan> </tspan><tspan>(test)</tspan><tspan> </tspan><tspan>ou</tspan></text>
+<text x="742.0" y="226.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">BatchSpanProcessor</tspan><tspan> </tspan><tspan>(prod)</tspan></text>
+<rect x="734.0" y="240.0" width="280.0" height="78.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="742.0" y="257.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Métriques</text>
+<text x="742.0" y="274.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>7</tspan><tspan> </tspan><tspan>instruments,</tspan><tspan> </tspan><tspan>étiquettes</tspan><tspan> </tspan><tspan>bornées</tspan><tspan> </tspan><tspan>:</tspan></text>
+<text x="742.0" y="292.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">latency_ms</tspan><tspan>,</tspan><tspan> </tspan><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">turns_total</tspan><tspan>,</tspan><tspan> </tspan><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">errors_total</tspan><tspan>,</tspan></text>
+<text x="742.0" y="310.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">tool_calls_total</tspan><tspan>...</tspan></text>
+<rect x="734.0" y="324.0" width="280.0" height="42.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="742.0" y="341.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Logs</text>
+<text x="742.0" y="358.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>structlog</tspan><tspan> </tspan><tspan>JSON</tspan><tspan> </tspan><tspan>+</tspan><tspan> </tspan><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">trace_id</tspan><tspan>,</tspan><tspan> </tspan><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">span_id</tspan></text>
+<rect x="1066.0" y="110.0" width="300.0" height="262.0" rx="8" fill="#f3f3f1" stroke="#d9d9d4" stroke-width="1.5"/>
+<text x="1082.0" y="138.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">4. Export</text>
+<rect x="1076.0" y="156.0" width="280.0" height="42.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="1084.0" y="173.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">OTLP gRPC :4317</text>
+<text x="1084.0" y="190.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>Jaeger</tspan><tspan> </tspan><tspan>(interface</tspan><tspan> </tspan><tspan>:16686)</tspan></text>
+<rect x="1076.0" y="204.0" width="280.0" height="60.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="1084.0" y="221.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Mémoire</text>
+<text x="1084.0" y="238.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>Rapport</tspan><tspan> </tspan><tspan>pytest</tspan><tspan> </tspan><tspan>sur</tspan><tspan> </tspan><tspan>test</tspan><tspan> </tspan><tspan>rouge</tspan><tspan> </tspan><tspan>;</tspan><tspan> </tspan><tspan>JSON</tspan><tspan> </tspan><tspan>par</tspan></text>
+<text x="1084.0" y="256.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>test</tspan><tspan> </tspan><tspan>en</tspan><tspan> </tspan><tspan>CI</tspan></text>
+<rect x="1076.0" y="270.0" width="280.0" height="42.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="1084.0" y="287.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Visionneuse HTML</text>
+<text x="1084.0" y="304.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">make</tspan><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f"> </tspan><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">demo-traces</tspan><tspan>,</tspan><tspan> </tspan><tspan>sans</tspan><tspan> </tspan><tspan>Docker</tspan></text>
+<rect x="1076.0" y="318.0" width="280.0" height="42.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="1084.0" y="335.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Métriques, logs</text>
+<text x="1084.0" y="352.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>Console</tspan><tspan> </tspan><tspan>/</tspan><tspan> </tspan><tspan>OTLP</tspan><tspan> </tspan><tspan>;</tspan><tspan> </tspan><tspan>stdout</tspan></text>
+<rect x="1408.0" y="110.0" width="300.0" height="268.0" rx="8" fill="#f3f3f1" stroke="#d9d9d4" stroke-width="1.5"/>
+<text x="1424.0" y="138.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">5. Exploitation</text>
+<rect x="1418.0" y="156.0" width="280.0" height="78.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="1426.0" y="173.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Diagnostic</text>
+<text x="1426.0" y="190.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>Span</tspan><tspan> </tspan><tspan>ERROR</tspan><tspan> </tspan><tspan>le</tspan><tspan> </tspan><tspan>plus</tspan><tspan> </tspan><tspan>profond,</tspan><tspan> </tspan><tspan>table</tspan><tspan> </tspan><tspan>des</tspan></text>
+<text x="1426.0" y="208.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>signatures,</tspan><tspan> </tspan><tspan>diff</tspan><tspan> </tspan><tspan>avec</tspan><tspan> </tspan><tspan>la</tspan><tspan> </tspan><tspan>dernière</tspan><tspan> </tspan><tspan>trace</tspan></text>
+<text x="1426.0" y="226.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>verte</tspan></text>
+<rect x="1418.0" y="240.0" width="280.0" height="60.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="1426.0" y="257.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">CI</text>
+<text x="1426.0" y="274.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan font-family="Consolas, ui-monospace, monospace" fill="#55554f">verify_incident_detection.py</tspan><tspan> </tspan><tspan>:</tspan><tspan> </tspan><tspan>5</tspan></text>
+<text x="1426.0" y="292.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>incidents</tspan><tspan> </tspan><tspan>réinjectés,</tspan><tspan> </tspan><tspan>5</tspan><tspan> </tspan><tspan>détectés</tspan></text>
+<rect x="1418.0" y="306.0" width="280.0" height="60.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="1426.0" y="323.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">SLI</text>
+<text x="1426.0" y="340.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>Taux</tspan><tspan> </tspan><tspan>de</tspan><tspan> </tspan><tspan>terminaison,</tspan><tspan> </tspan><tspan>erreurs</tspan><tspan> </tspan><tspan>d'outil,</tspan></text>
+<text x="1426.0" y="358.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>latence</tspan><tspan> </tspan><tspan>p95</tspan><tspan> </tspan><tspan>;</tspan><tspan> </tspan><tspan>cibles</tspan><tspan> </tspan><tspan>à</tspan><tspan> </tspan><tspan>calibrer</tspan></text>
+<line x1="344.0" y1="170.0" x2="378.0" y2="170.0" stroke="#2a5bd7" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="686.0" y1="170.0" x2="720.0" y2="170.0" stroke="#2a5bd7" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="1028.0" y1="170.0" x2="1062.0" y2="170.0" stroke="#2a5bd7" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="1370.0" y1="170.0" x2="1404.0" y2="170.0" stroke="#2a5bd7" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="40.0" y="420.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#1d1d1b" text-anchor="start">Pipeline d'évaluation (4e pilier)</text>
+<rect x="40.0" y="438.0" width="300.0" height="136.0" rx="8" fill="#f3f3f1" stroke="#d9d9d4" stroke-width="1.5"/>
+<text x="56.0" y="466.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">Implémenté : assertions</text>
+<rect x="50.0" y="484.0" width="280.0" height="78.0" rx="6" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1"/>
+<text x="58.0" y="501.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Déterministes, dans les tests</text>
+<text x="58.0" y="518.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>Réponse</tspan><tspan> </tspan><tspan>attendue</tspan><tspan> </tspan><tspan>par</tspan><tspan> </tspan><tspan>session,</tspan><tspan> </tspan><tspan>trajectoire</tspan></text>
+<text x="58.0" y="536.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>d'outils,</tspan><tspan> </tspan><tspan>isolation</tspan><tspan> </tspan><tspan>des</tspan><tspan> </tspan><tspan>sessions,</tspan><tspan> </tspan><tspan>index</tspan><tspan> </tspan><tspan>de</tspan></text>
+<text x="58.0" y="554.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>tour</tspan></text>
+<rect x="382.0" y="438.0" width="300.0" height="118.0" rx="8" fill="#f3f3f1" stroke="#8a8a83" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="398.0" y="466.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">Cible : jeu de référence</text>
+<rect x="392.0" y="484.0" width="280.0" height="60.0" rx="6" fill="#fcfcfb" stroke="#8a8a83" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="400.0" y="501.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Sessions + réponses attendues</text>
+<text x="400.0" y="518.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>Issues</tspan><tspan> </tspan><tspan>de</tspan><tspan> </tspan><tspan>la</tspan><tspan> </tspan><tspan>production,</tspan><tspan> </tspan><tspan>anonymisées,</tspan></text>
+<text x="400.0" y="536.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>versionnées</tspan></text>
+<rect x="724.0" y="438.0" width="300.0" height="118.0" rx="8" fill="#f3f3f1" stroke="#8a8a83" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="740.0" y="466.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">Cible : évaluateur</text>
+<rect x="734.0" y="484.0" width="280.0" height="60.0" rx="6" fill="#fcfcfb" stroke="#8a8a83" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="742.0" y="501.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Règles métier + juge</text>
+<text x="742.0" y="518.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>Score</tspan><tspan> </tspan><tspan>par</tspan><tspan> </tspan><tspan>critère</tspan><tspan> </tspan><tspan>:</tspan><tspan> </tspan><tspan>exactitude,</tspan><tspan> </tspan><tspan>respect</tspan><tspan> </tspan><tspan>de</tspan></text>
+<text x="742.0" y="536.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>la</tspan><tspan> </tspan><tspan>consigne</tspan></text>
+<rect x="1066.0" y="438.0" width="300.0" height="118.0" rx="8" fill="#f3f3f1" stroke="#8a8a83" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="1082.0" y="466.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">Cible : score rattaché</text>
+<rect x="1076.0" y="484.0" width="280.0" height="60.0" rx="6" fill="#fcfcfb" stroke="#8a8a83" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="1084.0" y="501.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Au trace_id</text>
+<text x="1084.0" y="518.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>Relie</tspan><tspan> </tspan><tspan>une</tspan><tspan> </tspan><tspan>mauvaise</tspan><tspan> </tspan><tspan>réponse</tspan><tspan> </tspan><tspan>à</tspan><tspan> </tspan><tspan>sa</tspan><tspan> </tspan><tspan>trace</tspan><tspan> </tspan><tspan>et</tspan><tspan> </tspan><tspan>à</tspan></text>
+<text x="1084.0" y="536.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>ses</tspan><tspan> </tspan><tspan>spans</tspan></text>
+<rect x="1408.0" y="438.0" width="300.0" height="118.0" rx="8" fill="#f3f3f1" stroke="#8a8a83" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="1424.0" y="466.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">Cible : SLO d'exactitude</text>
+<rect x="1418.0" y="484.0" width="280.0" height="60.0" rx="6" fill="#fcfcfb" stroke="#8a8a83" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="1426.0" y="501.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1d1d1b" text-anchor="start">Distribution des scores</text>
+<text x="1426.0" y="518.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>Seuil</tspan><tspan> </tspan><tspan>calibré</tspan><tspan> </tspan><tspan>;</tspan><tspan> </tspan><tspan>violation</tspan><tspan> </tspan><tspan>=</tspan><tspan> </tspan><tspan>blocage</tspan><tspan> </tspan><tspan>de</tspan></text>
+<text x="1426.0" y="536.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" fill="#55554f" xml:space="preserve"><tspan>déploiement</tspan></text>
+<line x1="344.0" y1="498.0" x2="378.0" y2="498.0" stroke="#8a8a83" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow-dash)"/>
+<line x1="686.0" y1="498.0" x2="720.0" y2="498.0" stroke="#8a8a83" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow-dash)"/>
+<line x1="1028.0" y1="498.0" x2="1062.0" y2="498.0" stroke="#8a8a83" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow-dash)"/>
+<line x1="1370.0" y1="498.0" x2="1404.0" y2="498.0" stroke="#8a8a83" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow-dash)"/>
+<line x1="1558.0" y1="382.0" x2="1216.0" y2="434.0" stroke="#8a8a83" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow-dash)"/>
+<text x="40.0" y="614.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#1d1d1b" text-anchor="start">Voir les traces et les spans : traces réelles produites par l'agent au rendu de ce schéma</text>
+<rect x="40.0" y="644.0" width="810.0" height="358.0" rx="8" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1.5"/>
+<text x="54.0" y="670.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">Tour sain : replay_delivery, tour 2 (modèle scripté : durées quasi nulles)</text>
+<text x="54.0" y="690.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace_id 34d9caf7bc2d7d0b0aee8867c6a10c7b</text>
+<text x="54.0" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="400" fill="#1d1d1b" text-anchor="start">agent.turn</text>
+<text x="130.3" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="11" font-weight="400" fill="#55554f" text-anchor="start">OK</text>
+<line x1="304.0" y1="708.0" x2="304.0" y2="738.0" stroke="#d9d9d4"/>
+<rect x="304.0" y="718.0" width="432.0" height="10" rx="4" fill="#6b7280"/>
+<text x="836.0" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">1.885 ms</text>
+<text x="72.0" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="400" fill="#1d1d1b" text-anchor="start">llm.invoke</text>
+<text x="148.3" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="11" font-weight="400" fill="#55554f" text-anchor="start">OK</text>
+<line x1="304.0" y1="738.0" x2="304.0" y2="768.0" stroke="#d9d9d4"/>
+<rect x="534.1" y="748.0" width="115.8" height="10" rx="4" fill="#6b7280"/>
+<text x="836.0" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">0.505 ms</text>
+<text x="72.0" y="787.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="400" fill="#1d1d1b" text-anchor="start">tool.call</text>
+<text x="141.7" y="787.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="11" font-weight="400" fill="#55554f" text-anchor="start">OK</text>
+<line x1="304.0" y1="768.0" x2="304.0" y2="798.0" stroke="#d9d9d4"/>
+<rect x="649.9" y="778.0" width="86.1" height="10" rx="4" fill="#6b7280"/>
+<text x="836.0" y="787.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">0.376 ms</text>
+<text x="54.0" y="824.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#55554f" text-anchor="start">Attributs du span agent.turn</text>
+<text x="54.0" y="848.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">test.case_id</text>
+<text x="314.0" y="848.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">schema::sain</text>
+<text x="54.0" y="870.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">mardik.session.id</text>
+<text x="314.0" y="870.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">replay-delivery-001</text>
+<text x="54.0" y="892.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">mardik.turn.index</text>
+<text x="314.0" y="892.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">2</text>
+<text x="54.0" y="914.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">mardik.context.messages</text>
+<text x="314.0" y="914.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">3</text>
+<text x="54.0" y="936.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">mardik.turn.user_message</text>
+<text x="314.0" y="936.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">Où en est sa livraison ?</text>
+<text x="54.0" y="958.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">mardik.turn.reply</text>
+<text x="314.0" y="958.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">Commande #1042 : expédiée, livraison prévue demain.</text>
+<text x="54.0" y="980.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">mardik.turn.outcome</text>
+<text x="314.0" y="980.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">completed</text>
+<rect x="910.0" y="644.0" width="810.0" height="306.0" rx="8" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1.5"/>
+<text x="924.0" y="670.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">Incident : timeout du modèle (INC-02), session incident_timeout</text>
+<text x="924.0" y="690.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace_id f87f82110867e9b4e404a8e4eb147838</text>
+<text x="924.0" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#d03b3b" text-anchor="start">!! agent.turn</text>
+<text x="1020.2" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="11" font-weight="400" fill="#55554f" text-anchor="start">ERROR</text>
+<line x1="1174.0" y1="708.0" x2="1174.0" y2="738.0" stroke="#d9d9d4"/>
+<rect x="1174.0" y="718.0" width="432.0" height="10" rx="4" fill="#d03b3b"/>
+<text x="1706.0" y="727.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">4.126 ms</text>
+<text x="942.0" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#d03b3b" text-anchor="start">!! llm.invoke</text>
+<text x="1038.2" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="11" font-weight="400" fill="#55554f" text-anchor="start">ERROR</text>
+<line x1="1174.0" y1="738.0" x2="1174.0" y2="768.0" stroke="#d9d9d4"/>
+<rect x="1287.9" y="748.0" width="209.2" height="10" rx="4" fill="#d03b3b"/>
+<text x="1706.0" y="757.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#55554f" text-anchor="end">1.998 ms</text>
+<text x="924.0" y="794.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#55554f" text-anchor="start">Attributs du span llm.invoke (span en erreur le plus profond)</text>
+<text x="924.0" y="818.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">test.case_id</text>
+<text x="1184.0" y="818.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">schema::erreur</text>
+<text x="924.0" y="840.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">gen_ai.operation.name</text>
+<text x="1184.0" y="840.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">chat</text>
+<text x="924.0" y="862.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">gen_ai.request.model</text>
+<text x="1184.0" y="862.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">Kimi-K2.6</text>
+<text x="924.0" y="884.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">mardik.llm.input_messages</text>
+<text x="1184.0" y="884.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">3</text>
+<text x="924.0" y="906.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">error.type</text>
+<text x="1184.0" y="906.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">timeout</text>
+<text x="924.0" y="928.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">exception</text>
+<text x="1184.0" y="928.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">mardik.errors.LLMTimeoutError: LLM invocation exceeded its deadline</text>
+<rect x="40.0" y="1042.0" width="1680.0" height="172.0" rx="8" fill="#fcfcfb" stroke="#d9d9d4" stroke-width="1.5"/>
+<text x="54.0" y="1070.0" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1d1d1b" text-anchor="start">Une session = N traces reliées par mardik.session.id (replay_clarification, rejouée tour par tour)</text>
+<rect x="54.0" y="1094.0" width="1652.0" height="26.0" rx="5" fill="#f3f3f1" stroke="#d9d9d4" stroke-width="1"/>
+<text x="66.0" y="1112.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace 5e8fb896e62b24d9c42025f7f3e54d72</text>
+<text x="420.0" y="1112.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">agent.turn  session=replay-clarification-001  tour=1  issue=completed  réponse=« Pouvez-vous indiquer votre numéro de commande ? »</text>
+<rect x="54.0" y="1128.0" width="1652.0" height="26.0" rx="5" fill="#f3f3f1" stroke="#d9d9d4" stroke-width="1"/>
+<text x="66.0" y="1146.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace 832a43fa17e8b622601f83bc30f5cfa6</text>
+<text x="420.0" y="1146.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">agent.turn  session=replay-clarification-001  tour=2  issue=completed  réponse=« Commande #2098 : en préparation. »</text>
+<rect x="54.0" y="1162.0" width="1652.0" height="26.0" rx="5" fill="#f3f3f1" stroke="#d9d9d4" stroke-width="1"/>
+<text x="66.0" y="1180.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#55554f" text-anchor="start">trace 1832d55a175453d85c5589a68c619111</text>
+<text x="420.0" y="1180.0" font-family="Consolas, ui-monospace, monospace" font-size="12" font-weight="400" fill="#1d1d1b" text-anchor="start">agent.turn  session=replay-clarification-001  tour=3  issue=completed  réponse=« Commande #2098 : en préparation. »</text>
+</svg>

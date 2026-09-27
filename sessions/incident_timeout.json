@@ -1,0 +1,8 @@
+{
+  "session_id": "incident-timeout-001",
+  "messages": [
+    {"role": "user", "content": "Bonjour, ma commande #2098 n'est toujours pas partie."},
+    {"role": "assistant", "content": "Bonjour, je vérifie son statut."},
+    {"role": "user", "content": "Vous pouvez me dire quand elle sera expédiée ?"}
+  ]
+}

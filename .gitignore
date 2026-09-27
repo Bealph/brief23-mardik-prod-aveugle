@@ -34,3 +34,6 @@ uv.lock
 
 # Docker
 .docker-data/
+
+# Test traces
+test-artifacts/

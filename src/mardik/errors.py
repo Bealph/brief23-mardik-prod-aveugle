@@ -8,3 +8,7 @@ class MardikError(Exception):
 
 class LLMTimeoutError(MardikError):
     """Raised when an LLM invocation exceeds its deadline."""
+
+
+class ToolExecutionError(MardikError):
+    """Raised when a tool requested by the model is unknown or fails."""
