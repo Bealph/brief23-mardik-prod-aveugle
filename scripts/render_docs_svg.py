@@ -317,7 +317,7 @@ def render_pipeline(traces: dict[str, list]) -> str:
         ("5. Exploitation", [
             ("Diagnostic", "Span ERROR le plus profond, table des signatures, diff avec la "
              "dernière trace verte"),
-            ("CI", "`verify_incident_detection.py` : 5 incidents réinjectés, 5 détectés"),
+            ("CI", "`verify_incident_detection.py` : 8 défauts réinjectés, 8 détectés"),
             ("SLI", "Taux de terminaison, erreurs d'outil, latence p95 ; cibles à calibrer"),
         ]),
     ]
